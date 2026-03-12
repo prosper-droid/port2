@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Prosper Ugwuegbu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/projects.css"/>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo"><a href="../index.html"><span class="logo-bracket">&lt;</span>PU<span class="logo-bracket">/&gt;</span></a></div>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="projects.html" class="nav-link active">Projects</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="theme-icon">☀</span></button>
+      <a href="contact.html" class="nav-cta">Hire Me</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero projects-hero">
+    <div class="projects-hero-glow"></div>
+    <div class="projects-hero-content">
+      <span class="section-tag">My Work</span>
+      <h1>Featured Projects</h1>
+      <p>Real-world applications built with passion, precision, and a relentless commitment to quality.</p>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="backend">Backend</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Grid -->
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-grid">
+
+        <!-- Project 1: NexaAuth -->
+        <div class="project-card featured reveal" data-category="fullstack security">
+          <div class="project-preview" style="background: linear-gradient(135deg, #0a1628 0%, #0d2040 100%);">
+            <div class="project-mockup auth-mockup">
+              <div class="mockup-topbar"><span></span><span></span><span></span></div>
+              <div class="mockup-body">
+                <div class="auth-form-preview">
+                  <div class="auth-logo-preview">🔐 NexaAuth</div>
+                  <div class="auth-input-preview"></div>
+                  <div class="auth-input-preview" style="width:70%"></div>
+                  <div class="auth-btn-preview"></div>
+                  <div class="auth-divider-preview">─── or ───</div>
+                  <div class="auth-social-preview">
+                    <span>G</span><span>in</span><span>𝕏</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <div class="project-num">01</div>
+              <div class="project-badge featured-badge">⭐ Featured</div>
+            </div>
+            <h2>NexaAuth — Secure Login System</h2>
+            <p>An enterprise-grade authentication platform with multi-factor authentication, OAuth2 social login (Google, GitHub, Twitter), biometric support, JWT session management, and a real-time admin dashboard for user analytics. Built with security-first architecture and OWASP compliance.</p>
+            <div class="project-features">
+              <span class="feature-item">✓ 2FA / TOTP</span>
+              <span class="feature-item">✓ OAuth2 Social Login</span>
+              <span class="feature-item">✓ Biometric Auth</span>
+              <span class="feature-item">✓ Admin Dashboard</span>
+              <span class="feature-item">✓ Rate Limiting</span>
+              <span class="feature-item">✓ Audit Logs</span>
+            </div>
+            <div class="project-stack">
+              <span>React</span><span>Node.js</span><span>MongoDB</span><span>JWT</span><span>Passport.js</span><span>Redis</span>
+            </div>
+            <div class="project-links">
+              <a href="../projects/authsystem.html" class="btn-primary">View Project →</a>
+              <a href="https://github.com/prosperugwuegbu" class="btn-outline" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: TechLand -->
+        <div class="project-card featured reveal" data-category="frontend">
+          <div class="project-preview" style="background: linear-gradient(135deg, #080b20 0%, #0a1535 100%);">
+            <div class="project-mockup landing-mockup">
+              <div class="mockup-topbar"><span></span><span></span><span></span></div>
+              <div class="mockup-body landing-body">
+                <div class="landing-nav-preview"></div>
+                <div class="landing-hero-preview">
+                  <div class="lh-heading"></div>
+                  <div class="lh-heading" style="width:70%; height:8px; opacity:0.5"></div>
+                  <div class="lh-btn"></div>
+                </div>
+                <div class="landing-cards-preview">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <div class="project-num">02</div>
+              <div class="project-badge">🚀 Showcase</div>
+            </div>
+            <h2>TechLand — SaaS Landing Page</h2>
+            <p>A futuristic, fully animated landing page for a fictional SaaS company. Features Three.js 3D hero animations, smooth scroll interactions, parallax effects, an interactive product demo section, pricing tables, and a newsletter signup. Achieves 98+ Lighthouse score.</p>
+            <div class="project-features">
+              <span class="feature-item">✓ 3D Hero Animation</span>
+              <span class="feature-item">✓ Parallax Scrolling</span>
+              <span class="feature-item">✓ Interactive Demo</span>
+              <span class="feature-item">✓ Pricing Tables</span>
+              <span class="feature-item">✓ 98 Lighthouse Score</span>
+              <span class="feature-item">✓ Fully Responsive</span>
+            </div>
+            <div class="project-stack">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Three.js</span><span>GSAP</span>
+            </div>
+            <div class="project-links">
+              <a href="../projects/techland.html" class="btn-primary">View Project →</a>
+              <a href="https://github.com/prosperugwuegbu" class="btn-outline" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: DevBoard -->
+        <div class="project-card reveal" data-category="fullstack frontend">
+          <div class="project-preview" style="background: linear-gradient(135deg, #060e1a 0%, #091525 100%);">
+            <div class="project-mockup dashboard-mockup">
+              <div class="mockup-topbar"><span></span><span></span><span></span></div>
+              <div class="mockup-body dash-body">
+                <div class="dash-sidebar">
+                  <div></div><div></div><div></div><div></div>
+                </div>
+                <div class="dash-main">
+                  <div class="dash-stats">
+                    <div class="dash-stat-card"></div>
+                    <div class="dash-stat-card"></div>
+                    <div class="dash-stat-card"></div>
+                  </div>
+                  <div class="dash-chart"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <div class="project-num">03</div>
+              <div class="project-badge">📊 Dashboard</div>
+            </div>
+            <h2>DevBoard — Developer Dashboard</h2>
+            <p>A real-time developer analytics and productivity hub. Tracks GitHub contributions, visualizes code metrics with D3.js charts, includes a Kanban task manager, WebSocket-powered live notifications, and a markdown-enabled notes section. Dark-mode first design.</p>
+            <div class="project-features">
+              <span class="feature-item">✓ Real-time WebSockets</span>
+              <span class="feature-item">✓ D3.js Charts</span>
+              <span class="feature-item">✓ Kanban Board</span>
+              <span class="feature-item">✓ GitHub Integration</span>
+              <span class="feature-item">✓ Markdown Notes</span>
+            </div>
+            <div class="project-stack">
+              <span>React</span><span>D3.js</span><span>Node.js</span><span>WebSocket</span><span>PostgreSQL</span>
+            </div>
+            <div class="project-links">
+              <a href="../projects/devboard.html" class="btn-primary">View Project →</a>
+              <a href="https://github.com/prosperugwuegbu" class="btn-outline" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: CodeMentor AI -->
+        <div class="project-card reveal" data-category="fullstack backend">
+          <div class="project-preview" style="background: linear-gradient(135deg, #0a0614 0%, #100b20 100%);">
+            <div class="project-mockup ai-mockup">
+              <div class="mockup-topbar"><span></span><span></span><span></span></div>
+              <div class="mockup-body ai-body">
+                <div class="ai-chat">
+                  <div class="ai-msg ai-msg-bot" style="width:80%"></div>
+                  <div class="ai-msg ai-msg-user" style="width:60%"></div>
+                  <div class="ai-msg ai-msg-bot" style="width:90%"></div>
+                  <div class="ai-msg ai-msg-bot" style="width:75%"></div>
+                  <div class="ai-input-row"><div class="ai-input-preview"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <div class="project-num">04</div>
+              <div class="project-badge">🤖 AI</div>
+            </div>
+            <h2>CodeMentor AI — Coding Assistant</h2>
+            <p>An AI-powered coding assistant and learning platform for beginner developers. Offers real-time code review, bug detection, personalized learning paths, and interactive coding challenges. Integrated with OpenAI API for contextual explanations.</p>
+            <div class="project-features">
+              <span class="feature-item">✓ AI Code Review</span>
+              <span class="feature-item">✓ Bug Detection</span>
+              <span class="feature-item">✓ Learning Paths</span>
+              <span class="feature-item">✓ Code Challenges</span>
+            </div>
+            <div class="project-stack">
+              <span>React</span><span>Python</span><span>FastAPI</span><span>OpenAI</span><span>MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-primary">Coming Soon</a>
+              <a href="https://github.com/prosperugwuegbu" class="btn-outline" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: EcoTrack -->
+        <div class="project-card reveal" data-category="fullstack backend">
+          <div class="project-preview" style="background: linear-gradient(135deg, #050e09 0%, #071a0e 100%);">
+            <div class="project-mockup eco-mockup">
+              <div class="mockup-topbar"><span></span><span></span><span></span></div>
+              <div class="mockup-body eco-body">
+                <div class="eco-map-preview"></div>
+                <div class="eco-stats-row">
+                  <div></div><div></div><div></div><div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-header">
+              <div class="project-num">05</div>
+              <div class="project-badge">🌿 Social Good</div>
+            </div>
+            <h2>EcoTrack — Environmental Monitor</h2>
+            <p>A community-driven environmental monitoring platform that lets users report pollution, track air quality indices, visualize data on interactive maps, and generate monthly sustainability reports. Mobile-responsive with PWA capabilities.</p>
+            <div class="project-features">
+              <span class="feature-item">✓ Interactive Maps</span>
+              <span class="feature-item">✓ Air Quality API</span>
+              <span class="feature-item">✓ PWA Capable</span>
+              <span class="feature-item">✓ PDF Reports</span>
+            </div>
+            <div class="project-stack">
+              <span>React</span><span>Leaflet.js</span><span>Node.js</span><span>PostgreSQL</span><span>Chart.js</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-primary">Coming Soon</a>
+              <a href="https://github.com/prosperugwuegbu" class="btn-outline" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub CTA -->
+  <section class="github-cta">
+    <div class="container">
+      <div class="github-cta-inner">
+        <div class="github-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <div class="github-cta-text">
+          <h2>See More on GitHub</h2>
+          <p>These are just my highlights. My full codebase includes dozens of experiments, open-source contributions, and side projects.</p>
+        </div>
+        <a href="https://github.com/prosperugwuegbu" target="_blank" class="btn-primary">View GitHub Profile →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo"><span class="logo-bracket">&lt;</span>PU<span class="logo-bracket">/&gt;</span><p>Building the future, one line at a time.</p></div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-socials">
+          <a href="mailto:prosper.ugwuegbu@gmail.com">✉</a>
+          <a href="https://github.com" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Ugwuegbu Prosper. Crafted with ♥ and lots of ☕</p></div>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script src="../js/projects.js"></script>
+</body>
+</html>

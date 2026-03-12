@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevBoard — Developer Dashboard | Prosper Ugwuegbu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <style>
+    .proj-back {
+      position: fixed; top: 90px; left: 3rem; z-index: 9999;
+      font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      padding: 0.5rem 1rem; border-radius: 100px;
+      transition: var(--transition);
+    }
+    .proj-back:hover { color: var(--accent); border-color: var(--accent); }
+
+    .proj-info-bar { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.2rem 0; }
+    .proj-info-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .proj-info-title { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); }
+    .proj-info-title strong { color: var(--accent); }
+    .proj-info-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .proj-info-tags span { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--accent-2); background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); padding: 0.25rem 0.7rem; border-radius: 100px; }
+
+    /* ====== DEVBOARD APP ====== */
+    .devboard-app {
+      background: #060e1a;
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .db-sidebar {
+      background: #08111f;
+      border-right: 1px solid rgba(0,245,160,0.1);
+      padding: 1.5rem 0;
+      display: flex; flex-direction: column;
+    }
+    .db-sidebar-logo { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 1rem; }
+    .db-sidebar-logo span { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: #00f5a0; }
+    .db-sidebar-logo p { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+    .db-nav { display: flex; flex-direction: column; gap: 0.2rem; padding: 0 0.8rem; flex: 1; }
+    .db-nav-item {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.65rem 0.8rem; border-radius: 8px;
+      font-size: 0.88rem; color: rgba(255,255,255,0.5);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .db-nav-item:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
+    .db-nav-item.active { background: rgba(0,245,160,0.1); color: #00f5a0; border: 1px solid rgba(0,245,160,0.15); }
+    .db-nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .db-nav-badge { margin-left: auto; background: rgba(0,245,160,0.15); color: #00f5a0; font-size: 0.7rem; font-family: 'Space Mono', monospace; padding: 0.1rem 0.4rem; border-radius: 4px; }
+    .db-sidebar-user { padding: 1rem 1.2rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 0.7rem; }
+    .db-user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #00f5a0, #00d4ff); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #050a0f; flex-shrink: 0; }
+    .db-user-name { font-size: 0.82rem; color: rgba(255,255,255,0.8); font-weight: 600; }
+    .db-user-role { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+
+    .db-main { padding: 2rem; overflow-y: auto; }
+    .db-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .db-greeting h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: #e8f4ff; }
+    .db-greeting p { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+    .db-header-actions { display: flex; gap: 0.5rem; }
+    .db-btn {
+      padding: 0.55rem 1.1rem; border-radius: 8px; font-size: 0.82rem;
+      font-family: 'DM Sans', sans-serif; cursor: pointer; font-weight: 600;
+      transition: all 0.2s ease; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .db-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
+    .db-btn-outline:hover { border-color: rgba(0,245,160,0.3); color: #00f5a0; }
+    .db-btn-primary { background: linear-gradient(135deg, #00f5a0, #00d4ff); border: none; color: #050a0f; }
+    .db-btn-primary:hover { opacity: 0.9; }
+
+    .db-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .db-stat-card {
+      background: #0a1628; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px; padding: 1.2rem;
+      transition: all 0.2s ease; cursor: default;
+    }
+    .db-stat-card:hover { border-color: rgba(0,245,160,0.2); transform: translateY(-2px); }
+    .db-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .db-stat-val { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: #e8f4ff; }
+    .db-stat-change { font-size: 0.75rem; margin-top: 0.3rem; }
+    .db-stat-change.up { color: #00f5a0; }
+    .db-stat-change.down { color: #ff5f57; }
+
+    .db-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+    .db-card { background: #0a1628; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.3rem; }
+    .db-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .db-card-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: #e8f4ff; }
+    .db-card-action { font-size: 0.75rem; color: #00f5a0; cursor: pointer; font-family: 'Space Mono', monospace; }
+
+    .db-chart { height: 120px; position: relative; display: flex; align-items: flex-end; gap: 6px; padding-top: 1rem; }
+    .db-bar {
+      flex: 1; border-radius: 5px 5px 0 0;
+      background: rgba(0,245,160,0.15);
+      transition: all 0.3s ease; cursor: pointer; position: relative; min-width: 0;
+    }
+    .db-bar:hover { background: rgba(0,245,160,0.35); }
+    .db-bar.active { background: linear-gradient(to top, #00f5a0, rgba(0,245,160,0.5)); }
+    .db-bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; color: rgba(255,255,255,0.3); font-family: 'Space Mono', monospace; white-space: nowrap; }
+
+    .db-activity { display: flex; flex-direction: column; gap: 0.7rem; }
+    .db-activity-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.6rem; border-radius: 8px; transition: background 0.2s ease; cursor: default; }
+    .db-activity-item:hover { background: rgba(255,255,255,0.03); }
+    .db-activity-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+    .db-activity-text { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.4; }
+    .db-activity-text strong { color: #e8f4ff; }
+    .db-activity-time { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 0.1rem; font-family: 'Space Mono', monospace; }
+
+    .db-tasks { display: flex; flex-direction: column; gap: 0.5rem; }
+    .db-task {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.65rem 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.2s ease; cursor: pointer;
+    }
+    .db-task:hover { border-color: rgba(0,245,160,0.2); }
+    .db-task.done { opacity: 0.5; }
+    .db-task-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      flex-shrink: 0; transition: all 0.2s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .db-task.done .db-task-check { border-color: #00f5a0; background: #00f5a0; color: #050a0f; font-size: 0.65rem; font-weight: 700; }
+    .db-task-text { font-size: 0.83rem; color: rgba(255,255,255,0.7); flex: 1; }
+    .db-task.done .db-task-text { text-decoration: line-through; color: rgba(255,255,255,0.3); }
+    .db-task-priority { font-size: 0.68rem; font-family: 'Space Mono', monospace; padding: 0.15rem 0.5rem; border-radius: 4px; }
+    .p-high { color: #ff5f57; background: rgba(255,95,87,0.1); }
+    .p-med { color: #febc2e; background: rgba(254,188,46,0.1); }
+    .p-low { color: #00f5a0; background: rgba(0,245,160,0.1); }
+
+    .db-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+    .lang-bar { margin-bottom: 0.6rem; }
+    .lang-name { display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 0.3rem; }
+    .lang-track { height: 6px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
+    .lang-fill { height: 100%; border-radius: 100px; }
+
+    @media(max-width:900px){
+      .devboard-app{grid-template-columns:1fr;}
+      .db-sidebar{display:none;}
+      .db-grid,.db-grid-3{grid-template-columns:1fr;}
+      .db-stats{grid-template-columns:repeat(2,1fr);}
+      .proj-back{left:1rem;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo"><a href="../index.html"><span class="logo-bracket">&lt;</span>PU<span class="logo-bracket">/&gt;</span></a></div>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../pages/projects.html" class="nav-link active">Projects</a></li>
+      <li><a href="../pages/contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀</span></button>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html">Home</a>
+    <a href="../pages/projects.html">Projects</a>
+    <a href="../pages/contact.html">Contact</a>
+  </div>
+
+  <a href="../pages/projects.html" class="proj-back">← Projects</a>
+
+  <div class="proj-info-bar" style="margin-top:64px;">
+    <div class="proj-info-inner">
+      <div class="proj-info-title">Project: <strong>DevBoard — Developer Dashboard</strong> | Interactive Demo</div>
+      <div class="proj-info-tags"><span>React</span><span>D3.js</span><span>WebSocket</span><span>PostgreSQL</span></div>
+    </div>
+  </div>
+
+  <div class="devboard-app">
+    <aside class="db-sidebar">
+      <div class="db-sidebar-logo">
+        <span>⚡ DevBoard</span>
+        <p>v2.4.1 · Connected</p>
+      </div>
+      <nav class="db-nav">
+        <div class="db-nav-item active"><span class="db-nav-icon">📊</span> Overview</div>
+        <div class="db-nav-item"><span class="db-nav-icon">✅</span> Tasks <span class="db-nav-badge">5</span></div>
+        <div class="db-nav-item"><span class="db-nav-icon">📁</span> Projects</div>
+        <div class="db-nav-item"><span class="db-nav-icon">📈</span> Analytics</div>
+        <div class="db-nav-item"><span class="db-nav-icon">🔔</span> Notifications <span class="db-nav-badge">3</span></div>
+        <div class="db-nav-item"><span class="db-nav-icon">⚙️</span> Settings</div>
+      </nav>
+      <div class="db-sidebar-user">
+        <div class="db-user-avatar">P</div>
+        <div>
+          <div class="db-user-name">Prosper U.</div>
+          <div class="db-user-role">Software Developer</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="db-main">
+      <div class="db-header">
+        <div class="db-greeting">
+          <h2>Good Evening, Prosper 👋</h2>
+          <p id="db-time">Loading time...</p>
+        </div>
+        <div class="db-header-actions">
+          <button class="db-btn db-btn-outline">⚡ Deploy</button>
+          <button class="db-btn db-btn-primary">+ New Project</button>
+        </div>
+      </div>
+
+      <div class="db-stats">
+        <div class="db-stat-card">
+          <div class="db-stat-label">Commits This Week <span>📦</span></div>
+          <div class="db-stat-val" id="commitCount">0</div>
+          <div class="db-stat-change up">↑ +12% from last week</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-label">PRs Merged <span>🔀</span></div>
+          <div class="db-stat-val">8</div>
+          <div class="db-stat-change up">↑ +3 this week</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-label">Open Issues <span>🐛</span></div>
+          <div class="db-stat-val">12</div>
+          <div class="db-stat-change down">↓ Resolved 4 today</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-label">Code Coverage <span>🎯</span></div>
+          <div class="db-stat-val">84%</div>
+          <div class="db-stat-change up">↑ +2% from last build</div>
+        </div>
+      </div>
+
+      <div class="db-grid">
+        <div class="db-card">
+          <div class="db-card-header">
+            <span class="db-card-title">Commit Activity</span>
+            <span class="db-card-action">This Week ▾</span>
+          </div>
+          <div class="db-chart" id="commitChart"></div>
+          <div style="height:24px;"></div>
+        </div>
+        <div class="db-card">
+          <div class="db-card-header">
+            <span class="db-card-title">Today's Tasks</span>
+            <span class="db-card-action">View All →</span>
+          </div>
+          <div class="db-tasks" id="taskList"></div>
+        </div>
+      </div>
+
+      <div class="db-grid-3">
+        <div class="db-card" style="grid-column: span 2;">
+          <div class="db-card-header">
+            <span class="db-card-title">Recent Activity</span>
+            <span class="db-card-action" id="refreshActivity">↻ Refresh</span>
+          </div>
+          <div class="db-activity" id="activityFeed"></div>
+        </div>
+        <div class="db-card">
+          <div class="db-card-header">
+            <span class="db-card-title">Languages</span>
+          </div>
+          <div id="langBars"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer" style="margin-top:0;">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo"><span class="logo-bracket">&lt;</span>PU<span class="logo-bracket">/&gt;</span><p>DevBoard is a project by Prosper Ugwuegbu</p></div>
+        <div class="footer-links">
+          <a href="../index.html">Portfolio</a>
+          <a href="../pages/projects.html">All Projects</a>
+          <a href="../pages/contact.html">Hire Me</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Ugwuegbu Prosper</p></div>
+    </div>
+  </footer>
+
+  <script src="../js/theme.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Live clock
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('db-time').textContent =
+        now.toLocaleDateString('en-NG', { weekday:'long', month:'long', day:'numeric' }) +
+        ' · ' + now.toLocaleTimeString('en-NG', { hour:'2-digit', minute:'2-digit' });
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // Commit chart
+    const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const commits = [8,15,6,22,11,4,7];
+    const maxC = Math.max(...commits);
+    const chart = document.getElementById('commitChart');
+    chart.innerHTML = commits.map((c,i) => `
+      <div class="db-bar ${i===3?'active':''}" style="height:${Math.round((c/maxC)*100)}%;" title="${c} commits">
+        <span class="db-bar-label">${days[i]}</span>
+      </div>`).join('');
+
+    // Animated counter
+    let counter = 0;
+    const interval = setInterval(() => {
+      counter++;
+      document.getElementById('commitCount').textContent = counter;
+      if (counter >= 47) clearInterval(interval);
+    }, 30);
+
+    // Tasks
+    const tasks = [
+      { text: 'Fix auth middleware bug', done: true, p: 'high' },
+      { text: 'Write unit tests for API', done: false, p: 'high' },
+      { text: 'Update project README', done: false, p: 'med' },
+      { text: 'Deploy to staging server', done: false, p: 'high' },
+      { text: 'Code review: pull request #24', done: true, p: 'med' },
+    ];
+    const taskList = document.getElementById('taskList');
+    tasks.forEach(task => {
+      const el = document.createElement('div');
+      el.className = `db-task ${task.done ? 'done' : ''}`;
+      el.innerHTML = `
+        <div class="db-task-check">${task.done ? '✓' : ''}</div>
+        <span class="db-task-text">${task.text}</span>
+        <span class="db-task-priority p-${task.p}">${task.p.toUpperCase()}</span>`;
+      el.addEventListener('click', () => el.classList.toggle('done'));
+      taskList.appendChild(el);
+    });
+
+    // Activity feed
+    const activities = [
+      { icon:'📦', color:'rgba(0,245,160,0.1)', text:'<strong>Pushed 3 commits</strong> to NexaAuth/main', time:'2 mins ago' },
+      { icon:'✅', color:'rgba(0,212,255,0.1)', text:'<strong>PR #22 merged</strong>: Add rate limiting middleware', time:'34 mins ago' },
+      { icon:'🐛', color:'rgba(255,95,87,0.1)', text:'<strong>Issue #15 opened</strong>: Session token expiry bug', time:'1 hr ago' },
+      { icon:'🚀', color:'rgba(168,85,247,0.1)', text:'<strong>Deployed</strong> devboard-v2.4.1 to staging', time:'3 hrs ago' },
+      { icon:'💬', color:'rgba(254,188,46,0.1)', text:'<strong>Code review comment</strong> on PR #21 from teammate', time:'5 hrs ago' },
+    ];
+    const feed = document.getElementById('activityFeed');
+
+    function renderFeed(list) {
+      feed.innerHTML = list.map(a => `
+        <div class="db-activity-item">
+          <div class="db-activity-icon" style="background:${a.color}">${a.icon}</div>
+          <div>
+            <div class="db-activity-text">${a.text}</div>
+            <div class="db-activity-time">${a.time}</div>
+          </div>
+        </div>`).join('');
+    }
+    renderFeed(activities);
+
+    document.getElementById('refreshActivity').addEventListener('click', () => {
+      feed.style.opacity = '0.4';
+      setTimeout(() => {
+        renderFeed([...activities].reverse());
+        feed.style.opacity = '1';
+      }, 600);
+    });
+
+    // Language bars
+    const langs = [
+      { name:'JavaScript', pct:42, color:'#f7df1e' },
+      { name:'Python', pct:28, color:'#3572a5' },
+      { name:'CSS', pct:18, color:'#563d7c' },
+      { name:'HTML', pct:8, color:'#e34c26' },
+      { name:'Shell', pct:4, color:'#89e051' },
+    ];
+    const langBars = document.getElementById('langBars');
+    langBars.innerHTML = langs.map(l => `
+      <div class="lang-bar">
+        <div class="lang-name"><span>${l.name}</span><span>${l.pct}%</span></div>
+        <div class="lang-track">
+          <div class="lang-fill" style="width:0%;background:${l.color};transition:width 1.5s ease;" data-w="${l.pct}%"></div>
+        </div>
+      </div>`).join('');
+
+    // Animate language bars on load
+    setTimeout(() => {
+      document.querySelectorAll('.lang-fill').forEach(el => {
+        el.style.width = el.dataset.w;
+      });
+    }, 300);
+
+  });
+  </script>
+</body>
+</html
